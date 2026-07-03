@@ -39,6 +39,7 @@
   .nav-name {
     font-family: 'STIX Two Text', serif; font-weight: 700; font-size: 18px;
     color: var(--ink); text-decoration: none;
+    white-space: nowrap; flex-shrink: 0;
   }
   .nav-links a {
     font-family: 'IBM Plex Mono', monospace; font-size: 13px;
@@ -99,7 +100,15 @@
   footer a:hover { color: var(--amber-deep); }
 
   @media (max-width: 860px) {
-    .nav-links a { margin-left: 12px; font-size: 12px; }
+    .nav-links a { margin-left: 14px; font-size: 12px; }
+  }
+
+  @media (max-width: 600px) {
+    .nav-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .nav-links { display: flex; flex-wrap: wrap; }
+    .nav-links a { margin-left: 0; margin-right: 18px; font-size: 13px; }
+    .pub-list li { grid-template-columns: 1fr; gap: 6px; }
+    .pub-num { padding-top: 0; }
   }
 </style>
 </head>
