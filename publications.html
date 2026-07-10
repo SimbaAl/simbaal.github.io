@@ -10,17 +10,25 @@
 <link href="https://fonts.googleapis.com/css2?family=STIX+Two+Text:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #FAFBFC;
+    --void: #0A1220;
+    --paper: #F4F7FB;
     --ink: #0E1B2C;
-    --ink-soft: #3D4A5C;
+    --ink-soft: #435061;
     --amber: #E8A33D;
+    --amber-hot: #FFC46B;
     --amber-deep: #C77F1A;
     --rule: rgba(14, 27, 44, 0.14);
+    --rule-dark: rgba(244, 247, 251, 0.12);
     --card: #FFFFFF;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    background: var(--paper); color: var(--ink);
+    background:
+      linear-gradient(rgba(14, 27, 44, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(14, 27, 44, 0.05) 1px, transparent 1px),
+      var(--paper);
+    background-size: 34px 34px, 34px 34px, auto;
+    color: var(--ink);
     font-family: 'Source Sans 3', sans-serif;
     font-size: 17px; line-height: 1.6;
     -webkit-font-smoothing: antialiased;
@@ -31,27 +39,33 @@
 
   nav {
     position: sticky; top: 0; z-index: 10;
-    background: rgba(250, 251, 252, 0.92);
-    backdrop-filter: blur(6px);
-    border-bottom: 1px solid var(--rule);
+    background: rgba(10, 18, 32, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--rule-dark);
   }
   .nav-inner { display: flex; align-items: baseline; justify-content: space-between; padding: 16px 0; }
   .nav-name {
     font-family: 'STIX Two Text', serif; font-weight: 700; font-size: 18px;
-    color: var(--ink); text-decoration: none;
+    color: var(--paper); text-decoration: none;
     white-space: nowrap; flex-shrink: 0;
   }
   .nav-links a {
     font-family: 'IBM Plex Mono', monospace; font-size: 13px;
-    color: var(--ink-soft); text-decoration: none; margin-left: 20px;
+    color: rgba(244, 247, 251, 0.62); text-decoration: none; margin-left: 20px;
+    padding-bottom: 3px;
+    background-image: linear-gradient(var(--amber), var(--amber));
+    background-repeat: no-repeat; background-size: 0% 1px; background-position: left bottom;
+    transition: background-size 0.3s ease, color 0.3s ease;
   }
-  .nav-links a:hover { color: var(--amber-deep); }
+  .nav-links a:hover { color: var(--amber-hot); background-size: 100% 1px; }
 
   header { padding: 64px 0 40px; border-bottom: 1px solid var(--rule); }
   .section-label {
-    font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--amber-deep); margin-bottom: 14px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 12.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--amber-deep); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 12px;
   }
+  .section-label::before { content: ''; width: 34px; height: 1px; background: var(--amber); }
   h1 {
     font-family: 'STIX Two Text', serif; font-weight: 700;
     font-size: clamp(34px, 5vw, 48px); letter-spacing: -0.015em; margin-bottom: 14px;
@@ -119,7 +133,7 @@
     <a class="nav-name" href="index.html">A. Ngorima</a>
     <div class="nav-links">
       <a href="index.html#about">About</a>
-      <a href="index.html#research">Research</a>
+      <a href="index.html#methods">Research</a>
       <a href="index.html#prosthetics">Prosthetics</a>
       <a href="index.html#teaching">Teaching</a>
       <a href="index.html#contact">Contact</a>
