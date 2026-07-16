@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EERI 325 | Signal Theory 2 — Interactive demos</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@stlite/browser@1.8.1/build/stlite.css" />
+  <style>
+    html, body { margin: 0; height: 100%; }
+    #loading {
+      position: fixed; inset: 0; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 0.75rem;
+      background: #0E2A47; color: #E8F0F4;
+      font-family: Georgia, "Times New Roman", serif; text-align: center;
+      z-index: 10; transition: opacity 0.4s;
+    }
+    #loading h1 { font-size: 1.5rem; margin: 0; }
+    #loading p { color: #C9962E; font-family: system-ui, sans-serif; font-size: 0.9rem; margin: 0; }
+    .spin {
+      width: 34px; height: 34px; border-radius: 50%;
+      border: 3px solid rgba(232,240,244,0.25); border-top-color: #C9962E;
+      animation: r 0.9s linear infinite;
+    }
+    @keyframes r { to { transform: rotate(360deg); } }
+  </style>
+</head>
+<body>
+  <div id="loading">
+    <div class="spin"></div>
+    <h1>EERI 325 &middot; Signal Theory 2</h1>
+    <p>Loading the Python runtime in your browser (10&ndash;20 s on first visit)&hellip;</p>
+  </div>
+  <div id="root"></div>
+  <script type="module">
+    import { mount } from "https://cdn.jsdelivr.net/npm/@stlite/browser@1.8.1/build/stlite.js";
+    mount(
+      {
+        requirements: ["numpy", "matplotlib"],
+        entrypoint: "app.py",
+        files: {
+          "app.py": { url: "./app.py" },
+        },
+      },
+      document.getElementById("root")
+    );
+    // Hide the splash once Streamlit has painted something.
+    const obs = new MutationObserver(() => {
+      const app = document.querySelector("#root [data-testid='stApp'], #root .stApp");
+      if (app) {
+        const l = document.getElementById("loading");
+        l.style.opacity = "0";
+        setTimeout(() => l.remove(), 450);
+        obs.disconnect();
+      }
+    });
+    obs.observe(document.getElementById("root"), { childList: true, subtree: true });
+  </script>
+</body>
+</html>
